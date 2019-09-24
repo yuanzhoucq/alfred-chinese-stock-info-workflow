@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>cn.joyuer.chinese-stock-info</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict/>
+	<key>createdby</key>
+	<string>joyuer</string>
+	<key>description</key>
+	<string>This workflow fetches Chinese stock information in real-time.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Chinese Stock Info</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>stk</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>fetching...</string>
+				<key>script</key>
+				<string>#!/usr/bin/python
+# encoding: utf-8
+import sys
+from workflow import Workflow3
+
+
+############## CONFIGURATION #################
+
+# Change your interested stock codes here...
+STOCK_LIST = ["000001", "000002", "000004"]
+
+##############################################
+
+
+
+def main(wf):
+	from cstock.request import Requester
+	from cstock.sina_engine import SinaEngine
+
+	engine = SinaEngine()
+	requester = Requester(engine)
+
+	for id in STOCK_LIST:
+		stock_obj = requester.request(id)
+		data = stock_obj[0].as_dict()
+		name = data["name"].decode("gbk")
+		price = data["price"]
+		change = (float(data["price"])-float(data["yesterday_close"]))/float(data["price"]) * 100
+		change = ("+" if change &gt; 0 else "") + "{0:.2f}".format(change)
+		item_title = name + ' ' + change + '%'
+		item_sub_title = 'Code: ' + id + ', price: ' + price
+		wf.add_item(item_title, item_sub_title)
+
+	wf.send_feedback()
+
+
+if __name__ == '__main__':
+    # Create a global `Workflow3` object
+    wf = Workflow3()
+    # Call your entry function via `Workflow3.run()` to enable its
+    # helper functions, like exception catching, ARGV normalization,
+    # magic arguments etc.
+    sys.exit(wf.run(main))</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Chinese stock info...</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>E452AF0E-BC8D-436D-A052-960953DD83C8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>This workflow fetches Chinese stock information in real-time.
+
+You should first change the stock code list in the code in order to display the stocks of your interests.</string>
+	<key>uidata</key>
+	<dict>
+		<key>E452AF0E-BC8D-436D-A052-960953DD83C8</key>
+		<dict>
+			<key>note</key>
+			<string>Change your interested stock codes here...</string>
+			<key>xpos</key>
+			<integer>340</integer>
+			<key>ypos</key>
+			<integer>150</integer>
+		</dict>
+	</dict>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>joyuer.cn</string>
+</dict>
+</plist>
