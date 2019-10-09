@@ -128,7 +128,7 @@ You should first change the stock code list in the code in order to display the 
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
 	<key>webaddress</key>
 	<string>joyuer.cn</string>
 </dict>
