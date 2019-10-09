@@ -11,7 +11,7 @@
 	<key>createdby</key>
 	<string>joyuer</string>
 	<key>description</key>
-	<string>This workflow fetches Chinese stock information in real-time.</string>
+	<string>This workflow fetches Chinese stock information in real time.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -112,7 +112,7 @@ if __name__ == '__main__':
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>This workflow fetches Chinese stock information in real-time.
+	<string>This workflow fetches Chinese stock information in real time.
 
 You should first change the stock code list in the code in order to display the stocks of your interests.</string>
 	<key>uidata</key>

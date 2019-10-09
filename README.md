@@ -1,6 +1,6 @@
 # Alfred-chinese-stock-info-workflow
 
-This workflow fetches Chinese stock information in real-time.
+This workflow fetches Chinese stock information in real time.
 
 You can cutomize the stock list of your own interests to display. Just [download it](https://github.com/yuanzhoucq/alfred-chinese-stock-info-workflow/releases/download/1.0/Chinese-Stock-Info.alfredworkflow) and simply change a stock code list, such as:
 
