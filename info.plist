@@ -71,8 +71,11 @@ def main(wf):
 		data = stock_obj[0].as_dict()
 		name = data["name"].decode("gbk")
 		price = data["price"]
-		change = (float(data["price"])-float(data["yesterday_close"]))/float(data["price"]) * 100
-		change = ("+" if change &gt; 0 else "") + "{0:.2f}".format(change)
+		if float(price) &lt; 0.01:
+			change = "0"
+		else:
+			change = (float(data["price"])-float(data["yesterday_close"]))/float(data["price"]) * 100
+			change = ("+" if change &gt; 0 else "") + "{0:.2f}".format(change)
 		item_title = name + ' ' + change + '%'
 		item_sub_title = 'Code: ' + id + ', price: ' + price
 		wf.add_item(item_title, item_sub_title)
